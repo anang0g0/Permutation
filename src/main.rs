@@ -17,7 +17,7 @@ fn random_shuffule(mut array: [i32;8192], size:i32)-> [i32;8192]
 
     for _i in (1..size).rev()
     {
-        a = (_i - 1) as usize;
+        a = (_i ) as usize;
         b = rand::thread_rng().gen_range(1, 8192)% _i as usize;
         // ソートするキーの型
         (array[a] , array[b] ) = ( array[b], array[a] )
