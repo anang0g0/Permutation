@@ -8,35 +8,43 @@ use rand::Rng;
     Fisher-Yates shuffle による方法
     配列の要素をランダムシャッフルする
 */
-fn random_shuffule(array:[i32;8192], size:i32)->&[i32;8192]
+fn random_shuffule(mut array: [i32;8192], size:i32)-> [i32;8192]
 {
-    let mut i:usize;
-    let a:usize;
+    let mut _i:usize;
+    let mut a:usize;
     let mut b:usize;
+     let mut temp:i32;
+    let mut it:i32;
 
-    for i in (1..size).rev()
+
+    print!("{}",array[0]);
+    for _i in (1..size).rev()
     {
-        a = (i - 1) as usize;
-        b = rand::thread_rng().gen_range(1, i) as usize;
+        a = (_i - 1) as usize;
+        b = rand::thread_rng().gen_range(1, _i) as usize;
         // ソートするキーの型
+        temp=array[a];
+        it=array[b];
+        array[a]=it;
+        array[b]=temp;
         //(array[a] , array[b] ) = ( array[b], array[a] )
     }
-    &array
+    array
 }
 
 fn main() {
-    let mut a:[i32;8192];
-    let mut i:i32;
+    let mut a:[i32;8192]=[0;8192];
+    let mut _i:usize;
 
-    for i in 1..8192
+    for _i in 1..10
     {
-    a[i]= rand::thread_rng().gen_range(1, 8192) as i32;
+    a[_i]= rand::thread_rng().gen_range(1, 8192) as i32;
     }
 
-    //random_shuffule(a,8192);
+    a=random_shuffule(a,8192);
     
-    for i in 1..8192{
-        print!("{},",a[i]);
+    for _i in 1..8192{
+        print!("{},",a[_i]);
     }
     println!("\n");
     println!("Hello, world!");
